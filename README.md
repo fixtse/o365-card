@@ -1,6 +1,9 @@
 <a name="readme-top"></a>
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
+[![HACS Validate](https://github.com/fixtse/office365-card/actions/workflows/github-actions-hacs.yml/badge.svg)](https://github.com/fixtse/office365-card/actions/workflows/github-actions-hacs.yml)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+
+
 
 # Office 365 Card
 
