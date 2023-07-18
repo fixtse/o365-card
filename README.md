@@ -25,6 +25,8 @@ The Icon and the name of the card are taken from the sensor's configuration
 
 Once installed can be added from the Dashboard Panel, just search for Office365 Card
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Default Config
 
 ```yaml
@@ -49,6 +51,7 @@ only_overdue: false
 | type  | **Required** | `custom:office365-card` |
 | entity | **Required**  | Home Assistant entity ID |
 | max_items | Optional | Maximum amount of items to show in the card <br> The header counter will still show the real value <br> Set to 0 to show all  |
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## To Do
 <p align="center"><img src="img/task.webp" alt="task sensor example img"></p>
@@ -69,6 +72,8 @@ only_overdue: false
 | max_items | Optional | Maximum amount of items to show in the card <br> The header counter will still show the real value <br> Set to 0 to show all  |
 | only_overdue | Optional | Only show overdue tasks <br> Default: false |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Teams
 <p align="center"><img src="img/teams_last_message.webp" alt="task sensor example img"></p>
 
@@ -81,6 +86,7 @@ only_overdue: false
 | type  | **Required** | `custom:office365-card` |
 | entity | **Required**  | Home Assistant entity ID |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Licence
 office365-card is [MIT licenced](license.txt)
