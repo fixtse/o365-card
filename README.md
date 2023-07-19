@@ -31,7 +31,7 @@ The Icon and the name of the card are taken from the sensor's configuration
 
 Once installed can be added from the Dashboard Panel, just search for O365 Card, works with the Lovelace Config Editor.
 
-<p align="center"><img src="img/config.webp" alt="lovelace config editor example"></p>
+<p align="center"><img src="https://fixtse.com/_next/image?url=%2Fstatic%2Fimages%2Foffice365%2Fconfig.webp&w=1200&q=75" alt="lovelace config editor example"></p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
