@@ -4,7 +4,7 @@ import {
   css,
 } from "https://unpkg.com/lit-element@3.3.2/lit-element.js?module";
 
-class Office365MailTodoViewEditor extends LitElement {
+class O365CardEditor extends LitElement {
     static get properties() {
         return {
             hass: Object,
@@ -160,7 +160,7 @@ class Office365MailTodoViewEditor extends LitElement {
     }
 }
 
-class Office365MailTodoView extends LitElement {
+class O365Card extends LitElement {
   static get properties() {
     return {
       hass: {},
@@ -337,7 +337,7 @@ class Office365MailTodoView extends LitElement {
   }
   
   static getConfigElement() {
-        return document.createElement('office365-card-editor');
+        return document.createElement('o365-card-editor');
     }
 
 
@@ -398,12 +398,12 @@ class Office365MailTodoView extends LitElement {
     `;
   }
 }
-customElements.define('office365-card', Office365MailTodoView);
-customElements.define('office365-card-editor', Office365MailTodoViewEditor);
+customElements.define('o365-card', O365Card);
+customElements.define('o365-card-editor', O365CardEditor);
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-    type: "office365-card",
-    name: "Office365 Card",
+    type: "o365-card",
+    name: "O365 Card",
     description: "A custom card to show your Inbox, To Do and Teams Last Message from Office365" // optional
 });

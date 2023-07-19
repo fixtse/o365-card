@@ -1,6 +1,6 @@
 {
-    "name": "Office 365 Card",
+    "name": "O365 Card",
     "render_readme": true,
-    "filename": "office365-card.js",
+    "filename": "o365-card.js",
     "content_in_root": true
 }
