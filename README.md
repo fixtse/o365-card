@@ -102,7 +102,7 @@ https://github.com/fixtse/o365-card
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Teams
-<p align="center"><img src="img/teams_last_message.webp" alt="task sensor example"></p>
+<p align="center"><img src="img/teams_last_message.webp" alt="chat sensor example"></p>
 
 * The card shows the information from the teams chat sensor ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/sensor.html#teams-chat-sensor))
 * Has a link that will open the conversation in teams.microsoft.com
