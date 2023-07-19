@@ -60,12 +60,13 @@ only_overdue: false
 <p align="center"><img src="img/task.webp" alt="task sensor example img"></p>
 
 * The card Lists the items from a tasks sensor ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/sensor.html#taskto-do-sensor))
-* The sensor only retrieve not finished tasks, so there is no way to show the finished ones
-* Each item has a link that will take you to the items page on todo.office.com
+* By default the sensor only retrieves incomplete tasks, if you want to show completed ones too, you need to configure it on the tasks configuration file ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/tasks_configuration.html#tasks-configuration))
+* Each item has a link that will take you to the item's page on todo.office.com
 * The State Color is based on the Due Date:
   * Warning : With Due Date, not overdue
   * Alert: With Due Date, overdue
   * Info: Without Due Date
+  * Success: Completed task
 
 #### Options
 | Name | Requirement | Description | 
