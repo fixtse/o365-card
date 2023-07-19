@@ -39,11 +39,18 @@ Once installed can be added from the Dashboard Panel, just search for O365 Card,
 
 ### HACS (Recommended)
 
-We are in the process of being added to the HACS default list of repositories, in the meantime, add this as a custom repository to install it through hacs.  So you can update easily when more features are added
+We are in the process of being added to the HACS default list of repositories, in the meantime, you can add this as a custom repository, so you can update easily when more features are added:
 
-```
+1. Go to HACS -> Frontend
+1. Click on the 3 dots in the upper right corner.
+1. Select Custom repositories from the menu and enter this: 
+
+```yaml
 https://github.com/fixtse/o365-card
 ```
+4. Select Lovelace as the Category.
+5. Open the repository and click on Download
+
 
 ### Manual
 

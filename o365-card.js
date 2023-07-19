@@ -4,6 +4,7 @@ import {
     css,
   } from "https://unpkg.com/lit-element@3.3.2/lit-element.js?module";
   
+  
   class O365CardEditor extends LitElement {
       static get properties() {
           return {
@@ -160,6 +161,18 @@ import {
       }
   }
   
+  function fireEvent(node, type, entity=null) {
+      let event = new Event(type, {
+        bubbles: true,
+        cancelable: false,
+        composed: true,
+      });
+      event.detail = entity || {};
+      if(entity) {
+        node.dispatchEvent(event);
+      }
+    }
+  
   class O365Card extends LitElement {
     static get properties() {
       return {
@@ -167,6 +180,23 @@ import {
         config: {},
       };
     }
+    
+    firstUpdated() {
+        if(this?.shadowRoot) {
+          const soc = this.shadowRoot.getElementById('o365-card-icon');
+          this._attacheEventListener(soc)
+        }
+      }
+    
+    _attacheEventListener(elem) {
+        if (elem && (elem instanceof HTMLElement)) {
+          elem.addEventListener('click', (e) => {
+              e.stopPropagation();
+              fireEvent(elem, 'hass-more-info', { entityId: this.config.entity } );
+          });
+        }
+    }
+
   
     render() {
       const entityId = this.config.entity;
@@ -194,7 +224,7 @@ import {
               return attributeValue ? html`
                 <ha-card class="card">
                   <div class='title_tasks'>
-                      <ha-icon icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> ${this.hass.states[entityId].attributes['friendly_name']} (${this.hass.states[entityId].state})
+                      <ha-icon id="o365-card-icon" icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> ${this.hass.states[entityId].attributes['friendly_name']} (${this.hass.states[entityId].state})
                   </div>
                   <ul class="separator">
                   ${attributeValue.slice(0,max_item).map(entry => {
@@ -265,7 +295,7 @@ import {
                   return attributeValue ? html`
                     <ha-card class="card">
                       <div class='title'>
-                          <ha-icon icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> <a href="https://outlook.office365.com/mail/" target="_blank">${this.hass.states[entityId].attributes['friendly_name']}</a> (${this.hass.states[entityId].state})
+                          <ha-icon id="o365-card-icon" icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> <a href="https://outlook.office365.com/mail/" target="_blank">${this.hass.states[entityId].attributes['friendly_name']}</a> (${this.hass.states[entityId].state})
                       </div>
                       ${attributeValue.slice(0,max_item).map(entry => {
                               let t = new Date(entry.received);
@@ -308,7 +338,7 @@ import {
                   return html`
                   <ha-card class="card">
                       <div class='title'>
-                          <ha-icon icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> ${this.hass.states[entityId].attributes['friendly_name']} Last Message
+                          <ha-icon id="o365-card-icon" icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> ${this.hass.states[entityId].attributes['friendly_name']} Last Message
                       </div>
                       <div class="list"><b>From: </b>${this.hass.states[entityId].attributes['from_display_name']} </div>
                       <div class="list"><b>At: </b>${t.toLocaleDateString("en-US", options_completed)}</div>
@@ -351,7 +381,7 @@ import {
     }
   
     static getStubConfig() {
-      return { entity: "sensor.inbox", max_items: 4, only_overdue: false }
+      return { entity: "sensor.inbox", max_items: 0, only_overdue: false }
     }
     
     static getConfigElement() {
