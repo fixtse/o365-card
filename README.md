@@ -52,6 +52,7 @@ https://github.com/fixtse/office365-card
 3. Add a reference to `office365-card.js` in Lovelace.
    1. **Go to:** _Settings_ → _Dashboards_ → _Resources_ → Click Plus button → Set _Url_ as `/local/office365-card.js` → Set _Resource type_ as `JavaScript Module`.   
 4. Add `custom:office365-card.js` to Lovelace UI as any other card (using either editor or YAML configuration).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Supported Types
 
@@ -60,8 +61,8 @@ https://github.com/fixtse/office365-card
 
 * The card shows the email list from an email sensor ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/installation_and_configuration.html#email_sensors)) or a query sensor ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/installation_and_configuration.html#query_sensors))
 * State Color based on importance level of the email
-  * Info: Normal
-  * Alert: High
+  * :information_source: Info: Normal
+  * :no_entry: Alert: High
 
 #### Options
 | Name  | Requirement | Description | 
@@ -78,10 +79,10 @@ https://github.com/fixtse/office365-card
 * By default the sensor only retrieves incomplete tasks, if you want to show completed ones too, you need to configure it on the tasks configuration file ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/tasks_configuration.html#tasks-configuration))
 * Each item has a link that will take you to the item's page on todo.office.com
 * The State Color is based on the Due Date:
-  * Warning : With Due Date, not overdue
-  * Alert: With Due Date, overdue
-  * Info: Without Due Date
-  * Success: Completed task
+  * :warning: Warning : With Due Date, not overdue
+  * :no_entry: Alert: With Due Date, overdue
+  * :information_source: Info: Without Due Date
+  * :white_check_mark: Success: Completed task
 
 #### Options
 | Name | Requirement | Description | 
