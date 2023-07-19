@@ -16,7 +16,7 @@ class Office365MailTodoView extends LitElement {
   render() {
     const entityId = this.config.entity;
     let max_item = this.config.max_items;
-    
+    let options_completed = {year: 'numeric', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'};
     if (!!this.hass.states[entityId]){
         if(!this.hass.states[entityId].attributes['data']) {
             // Tasks
@@ -30,7 +30,8 @@ class Office365MailTodoView extends LitElement {
             if (max_item == 0){
                 max_item = attributeValue.size;
             }
-            let card_type; 
+            let card_type;
+            let options = {year: 'numeric', day:'numeric', month:'short'};
             return attributeValue ? html`
               <ha-card class="card">
                 <div class='title_tasks'>
@@ -42,9 +43,10 @@ class Office365MailTodoView extends LitElement {
                         card_type="info"; 
                         return entry.subject ? html`           
                                  <li>
-                                    <ha-alert alert-type=${card_type} class="tasks">${entry.subject} 
-                                        <a href="https://to-do.office.com/tasks/id/${entry.task_id}" target="_blank">&#128279;</a>
-                                     </ha-alert>
+                                    <ha-alert alert-type=${entry.completed ? "success" :card_type} class="tasks"><div class="${entry.completed ? "completed": ""}">${entry.subject} 
+                                        <a href="https://to-do.office.com/tasks/id/${entry.task_id}" target="_blank">&#128279;</a></div>
+                                        <div>${ entry.completed ? ( entry.completed != false ? 'Completed on: '+new Date(entry.completed).toLocaleDateString("en-US", options) : '' ) : '' }</div>
+                                    </ha-alert>
                                  </li>`: html`<li>
                                                 <ha-card class="not-found">
                                                        <ha-alert alert-type="warning">Entity <b>${entityId}</b> is not a valid o365 task item.</ha-alert>
@@ -54,8 +56,8 @@ class Office365MailTodoView extends LitElement {
                     }else{
                         let now = new Date().getTime();
                         let due = new Date(entry.due);
-                        let options = {year: 'numeric', day:'numeric', month:'short'};
-                        
+                        //Fix date transform
+                        due.setHours(due.getHours() + 24);
                         //Its overdue?
                         if(now < due.getTime()){  
                             //no
@@ -65,9 +67,10 @@ class Office365MailTodoView extends LitElement {
                            card_type="error";
                         }
                         return entry.subject ? html`           
-                                 <li><ha-alert alert-type=${card_type} class="tasks">${entry.subject} 
-                                        <a href="https://to-do.office.com/tasks/id/${entry.task_id}" target="_blank">&#128279;</a>
-                                            <div>Due date: <b>${due.toLocaleDateString("en-US", options)}</b></div>
+                                 <li><ha-alert alert-type=${entry.completed ? "success" :card_type} class="tasks"><div class="${entry.completed ? "completed": ""}">${entry.subject} 
+                                        <a href="https://to-do.office.com/tasks/id/${entry.task_id}" target="_blank">&#128279;</a></div>
+                                        <div>Due date: <b>${due.toLocaleDateString("en-US", options)}</b></div>
+                                        <div>${ entry.completed ? ( entry.completed != false ? 'Completed on: '+new Date(entry.completed).toLocaleDateString("en-US", options) : '' ) : '' }</div>
                                      </ha-alert>
                                  </li>`: html`<li>
                                                 <ha-card class="not-found">
@@ -96,7 +99,6 @@ class Office365MailTodoView extends LitElement {
                     </div>
                     ${attributeValue.slice(0,max_item).map(entry => {
                             let t = new Date(entry.received);
-                            let options = {year: 'numeric', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'};
                             let card_type="info"; 
                             if (entry.importance != "normal"){
                                 al_type="error"; 
@@ -111,7 +113,7 @@ class Office365MailTodoView extends LitElement {
                                             <b>From: </b><a href="mailto:${entry.sender}">${entry.sender}</a>
                                          </div>
                                          <div>
-                                            <b>Date: </b>${t.toLocaleDateString("en-US", options)}
+                                            <b>Date: </b>${t.toLocaleDateString("en-US", options_completed)}
                                          </div>
                                      </ha-alert>
                                  </div>`
@@ -126,14 +128,13 @@ class Office365MailTodoView extends LitElement {
             }else{
                 //Teams Message
                 let t = new Date(this.hass.states[entityId].state);
-                let options = {year: 'numeric', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'};
                 return html`
                 <ha-card class="card">
                     <div class='title'>
                         <ha-icon icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> ${this.hass.states[entityId].attributes['friendly_name']} Last Message
                     </div>
                     <div class="list"><b>From: </b>${this.hass.states[entityId].attributes['from_display_name']} </div>
-                    <div class="list"><b>At: </b>${t.toLocaleDateString("en-US", options)}</div>
+                    <div class="list"><b>At: </b>${t.toLocaleDateString("en-US", options_completed)}</div>
                     <div class="list"><b>Message: </b>${this.hass.states[entityId].attributes['content'].replace(/(<([^>]+)>)/gi, "")}</div>
                     <br>
                     <div class="list">Open in <a href="https://teams.microsoft.com/_#/conversations/${  this.hass.states[entityId].attributes['chat_id']}?ctx=chat" target="_blank">Teams</a></div>
@@ -220,6 +221,9 @@ class Office365MailTodoView extends LitElement {
       }
       .list {
         padding: 5px 1em 0 2em;
+      }
+      .completed {
+        text-decoration: line-through;
       }
       .tasks {
         padding: 0px 0em 0px 0px;
