@@ -183,7 +183,7 @@ import {
               }
               
               if (max_item == 0){
-                  if(attributeValue.size){
+                  if(typeof(attributeValue.size) != 'unavailable'){
                       max_item = attributeValue.size;
                   }else{
                       max_item = 15;
@@ -256,7 +256,11 @@ import {
                   //Email
                   const attributeValue = this.hass.states[entityId].attributes['data'];
                   if (max_item == 0){
-                      max_item = attributeValue.size;
+                      if(typeof(attributeValue.size) != 'unavailable'){
+                          max_item = attributeValue.size;
+                      }else{
+                          max_item = 15;
+                      }
                   }
                   return attributeValue ? html`
                     <ha-card class="card">
