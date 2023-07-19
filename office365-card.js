@@ -4,6 +4,161 @@ import {
   css,
 } from "https://unpkg.com/lit-element@3.3.2/lit-element.js?module";
 
+class Office365MailTodoViewEditor extends LitElement {
+    static get properties() {
+        return {
+            hass: Object,
+            config: Object,
+        };
+    }
+    
+    get _entity() {
+        if (this.config) {
+            return this.config.entity || '';
+        }
+        
+        return '';
+    }
+
+    get _max_items() {
+        if (this.config) {
+            return (this.config.max_items !== undefined) ? this.config.max_items : 0;
+        }
+        
+        return 0;
+    }
+    
+    get _only_overdue() {
+        if (this.config) {
+            return this.config.only_overdue || false;
+        }
+        
+        return false;
+    }
+    
+    setConfig(config) {
+        this.config = config;
+    }
+    
+    configChanged(config) {
+        const e = new Event('config-changed', {
+            bubbles: true,
+            composed: true,
+        });
+        
+        e.detail = {config: config};
+        
+        this.dispatchEvent(e);
+    }
+    
+    getEntitiesByType(type) {
+        return this.hass
+            ? Object.keys(this.hass.states).filter(entity => entity.substr(0, entity.indexOf('.')) === type)
+            : [];
+    }
+
+    isNumeric(v) {
+        return !isNaN(parseFloat(v)) && isFinite(v);
+    }
+    
+    valueChanged(e) {
+        if (
+            !this.config
+            || !this.hass
+            || (this[`_${e.target.configValue}`] === e.target.value)
+        ) {
+            return;
+        }
+        
+        if (e.target.configValue) {
+            if (e.target.value === '') {
+                if (!['entity', 'only_overdue'].includes(e.target.configValue)) {
+                    delete this.config[e.target.configValue];
+                }
+            } else {
+                this.config = {
+                    ...this.config,
+                    [e.target.configValue]: e.target.checked !== undefined
+                        ? e.target.checked
+                        : this.isNumeric(e.target.value) ? parseFloat(e.target.value) : e.target.value,
+                };
+            }
+        }
+        
+        this.configChanged(this.config);
+    }
+    
+    render() {
+        if (!this.hass) {
+            return html``;
+        }
+        
+        const entities = this.getEntitiesByType('sensor');
+        const completedCount = [...Array(16).keys()];
+
+        return html`<div class="card-config">
+            <div class="option">
+                <ha-select
+                    naturalMenuWidth
+                    fixedMenuPosition
+                    label="Entity (required)"
+                    @selected=${this.valueChanged}
+                    @closed=${(event) => event.stopPropagation()}
+                    .configValue=${'entity'}
+                    .value=${this._entity}
+                >
+                    ${entities.map(entity => {
+                        return html`<mwc-list-item .value="${entity}">${entity}</mwc-list-item>`;
+                    })}
+                </ha-select>
+            </div>
+
+            <div class="option">
+                <ha-select
+                    naturalMenuWidth
+                    fixedMenuPosition
+                    label="Number of elements to show (0 to disable)"
+                    @selected=${this.valueChanged}
+                    @closed=${(event) => event.stopPropagation()}
+                    .configValue=${'max_items'}
+                    .value=${this._max_items}
+                >
+                    ${completedCount.map(count => {
+                        return html`<mwc-list-item .value="${count}">${count}</mwc-list-item>`;
+                    })}
+                </ha-select>
+            </div>
+            
+            <div class="option">
+                <ha-switch
+                 .checked=${(this.config.only_overdue !== undefined) && (this.config.only_overdue !== false)}
+                        .configValue=${'only_overdue'}
+                        @change=${this.valueChanged}
+                >
+                </ha-switch>
+                <span>Only show overdue (Tasks only)</span>
+            </div>
+        </div>`;
+    }
+    
+    static get styles() {
+        return css`
+            .card-config ha-select {
+                width: 100%;
+            }
+            
+            .option {
+                display: flex;
+                align-items: center;
+                padding: 0px 10px 20px 5px;
+            }
+            
+            .option ha-switch {
+                margin-right: 10px;
+            }
+        `;
+    }
+}
 
 class Office365MailTodoView extends LitElement {
   static get properties() {
@@ -28,7 +183,11 @@ class Office365MailTodoView extends LitElement {
             }
             
             if (max_item == 0){
-                max_item = attributeValue.size;
+                if(attributeValue.size){
+                    max_item = attributeValue.size;
+                }else{
+                    max_item = 15;
+                }
             }
             let card_type;
             let options = {year: 'numeric', day:'numeric', month:'short'};
@@ -176,6 +335,10 @@ class Office365MailTodoView extends LitElement {
   static getStubConfig() {
     return { entity: "sensor.inbox", max_items: 4, only_overdue: false }
   }
+  
+  static getConfigElement() {
+        return document.createElement('office365-card-editor');
+    }
 
 
   static get styles() {
@@ -236,6 +399,7 @@ class Office365MailTodoView extends LitElement {
   }
 }
 customElements.define('office365-card', Office365MailTodoView);
+customElements.define('office365-card-editor', Office365MailTodoViewEditor);
 
 window.customCards = window.customCards || [];
 window.customCards.push({
@@ -243,4 +407,3 @@ window.customCards.push({
     name: "Office365 Card",
     description: "A custom card to show your Inbox, To Do and Teams Last Message from Office365" // optional
 });
-
