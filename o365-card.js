@@ -183,7 +183,7 @@ import {
               }
               
               if (max_item == 0){
-                  if(typeof(attributeValue.size) != 'unavailable'){
+                  if(typeof(attributeValue) != 'undefined'){
                       max_item = attributeValue.size;
                   }else{
                       max_item = 15;
@@ -256,7 +256,7 @@ import {
                   //Email
                   const attributeValue = this.hass.states[entityId].attributes['data'];
                   if (max_item == 0){
-                      if(typeof(attributeValue.size) != 'unavailable'){
+                      if(typeof(attributeValue) != 'undefined'){
                           max_item = attributeValue.size;
                       }else{
                           max_item = 15;
