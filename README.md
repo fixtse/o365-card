@@ -1,7 +1,6 @@
 <a name="readme-top"></a>
 
-[![HACS Validate](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml/badge.svg)](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml)
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+[![HACS Validate](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml/badge.svg)](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml) [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
 [![GitHub release](https://img.shields.io/github/v/release/fixtse/o365-card)](https://github.com/fixtse/o365-card/releases/latest) [![maintained](https://img.shields.io/maintenance/yes/2023.svg)](#) [![maintainer](https://img.shields.io/badge/maintainer-%20%40fixtse-blue.svg)](https://github.com/fixtse)
 
@@ -23,11 +22,11 @@ Needs the [O365 Home Assistant Integration](https://github.com/RogerSelwyn/O365-
 
 [![Video Tutorial](http://img.youtube.com/vi/yKr5nMzOaAI/0.jpg)](http://www.youtube.com/watch?v=yKr5nMzOaAI "Integrating Office 365 into Home Assistant")
 
-This is a Card to show information from your O365 sensors into your home assistant dashboard. The intend its to create a <b>simple</b> and easy to use card to show the sensors information in the dashboard.
+This is a Custom Card to show information from your O365 sensors into the home assistant dashboard.<br /> The intent is to create a **simple** and easy-to-use card to show the sensor's information in the dashboard.
 
 I made a video about the O365 integration and on my research, I couldn't find any other card that allowed me to show the information from the sensors easily. So I made this card to simplify the process for everyone that needs it.
 
-The Icon and the name of the card are taken from the sensor's configuration
+The Icon and the name of the card are taken from the sensor's configuration, click on the card icon to change them if you need.
 
 Once installed can be added from the Dashboard Panel, just search for O365 Card, works with the Lovelace Config Editor.
 
@@ -41,7 +40,7 @@ Once installed can be added from the Dashboard Panel, just search for O365 Card,
 
 We are in the process of being added to the HACS default list of repositories, in the meantime, you can add this as a custom repository, so you can update easily when more features are added:
 
-1. Go to HACS -> Frontend
+1. Go to HACS → Frontend
 1. Click on the 3 dots in the upper right corner.
 1. Select Custom repositories from the menu and enter this: 
 
