@@ -207,7 +207,10 @@ import {
               // Tasks
               let attributeValue;
               if(this.config.only_overdue == true){
-                  attributeValue = this.hass.states[entityId].attributes['overdue_tasks'];
+                  attributeValue = this.hass.states[entityId].attributes['overdue_tasks'];                  
+                  if (typeof(attributeValue) != 'undefined'){
+                      attributeValue = this.hass.states[entityId].attributes['all_tasks'];
+                  }
               }else{
                   attributeValue = this.hass.states[entityId].attributes['all_tasks'];
               }
