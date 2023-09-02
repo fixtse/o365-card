@@ -1,8 +1,6 @@
-import {
-    LitElement,
-    html,
-    css,
-  } from "https://unpkg.com/lit-element@3.3.2/lit-element.js?module";
+const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace"));
+const html = LitElement.prototype.html;
+const css = LitElement.prototype.css;
   
   
   class O365CardEditor extends LitElement {
@@ -208,8 +206,17 @@ import {
               let attributeValue;
               if(this.config.only_overdue == true){
                   attributeValue = this.hass.states[entityId].attributes['overdue_tasks'];                  
-                  if (typeof(attributeValue) != 'undefined'){
-                      attributeValue = this.hass.states[entityId].attributes['all_tasks'];
+                  if (typeof(attributeValue) == 'undefined'){
+                    return html`
+                    <ha-card class="card">
+                      <div class='title_tasks'>
+                          <ha-icon id="o365-card-icon" icon="${this.hass.states[entityId].attributes['icon']}"></ha-icon> ${this.hass.states[entityId].attributes['friendly_name']} (${this.hass.states[entityId].state})
+                      </div>
+                      <div class='empty'>
+                      No Overdue Tasks
+                      </div>
+                    </ha-card>
+                    `;
                   }
               }else{
                   attributeValue = this.hass.states[entityId].attributes['all_tasks'];
@@ -435,6 +442,12 @@ import {
         }
         .list {
           padding: 5px 1em 0 2em;
+        }
+        .empty{
+            font-weight: bold;
+            font-size: 15px;
+            padding: 10px 10px 0 0; 
+            text-align: center;
         }
         .completed {
           text-decoration: line-through;
