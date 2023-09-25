@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-[![HACS Validate](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml/badge.svg)](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml) [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+[![HACS Validate](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml/badge.svg)](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml) [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 
 [![GitHub release](https://img.shields.io/github/v/release/fixtse/o365-card)](https://github.com/fixtse/o365-card/releases/latest) [![maintained](https://img.shields.io/maintenance/yes/2023.svg)](#) [![maintainer](https://img.shields.io/badge/maintainer-%20%40fixtse-blue.svg)](https://github.com/fixtse)
 
@@ -38,17 +38,9 @@ Once installed can be added from the Dashboard Panel, just search for O365 Card,
 
 ### HACS (Recommended)
 
-We are in the process of being added to the HACS default list of repositories, in the meantime, you can add this as a custom repository, so you can update easily when more features are added:
+Use this button to be redirected to the card's page on HACS
 
-1. Go to HACS → Frontend
-1. Click on the 3 dots in the upper right corner.
-1. Select Custom repositories from the menu and enter this: 
-
-```yaml
-https://github.com/fixtse/o365-card
-```
-4. Select Lovelace as the Category.
-5. Open the repository and click on Download
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=o365-card&owner=fixtse&category=Plugin)
 
 
 ### Manual
