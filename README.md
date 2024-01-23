@@ -2,7 +2,7 @@
 
 [![HACS Validate](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml/badge.svg)](https://github.com/fixtse/o365-card/actions/workflows/github-actions-hacs.yml) [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
 
-[![GitHub release](https://img.shields.io/github/v/release/fixtse/o365-card)](https://github.com/fixtse/o365-card/releases/latest) [![maintained](https://img.shields.io/maintenance/yes/2023.svg)](#) [![maintainer](https://img.shields.io/badge/maintainer-%20%40fixtse-blue.svg)](https://github.com/fixtse)
+[![GitHub release](https://img.shields.io/github/v/release/fixtse/o365-card)](https://github.com/fixtse/o365-card/releases/latest) [![maintained](https://img.shields.io/maintenance/yes/2024.svg)](#) [![maintainer](https://img.shields.io/badge/maintainer-%20%40fixtse-blue.svg)](https://github.com/fixtse)
 
 
 # O365 Card for Home Assistant
