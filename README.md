@@ -14,7 +14,6 @@ Table of contents
 * [Installation](#installation)
 * [Supported Types](#supported-types)
   * [Inbox](#inbox)
-  * [To Do](#to-do)
   * [Teams](#teams)
 
 ## Introduction
@@ -30,7 +29,10 @@ The Icon and the name of the card are taken from the sensor's configuration, cli
 
 Once installed can be added from the Dashboard Panel, just search for O365 Card, works with the Lovelace Config Editor.
 
-<p align="center"><img src="https://fixtse.com/_next/image?url=%2Fstatic%2Fimages%2Foffice365%2Fconfig.webp&w=1200&q=75" alt="lovelace config editor example"></p>
+<p align="center"><img src="https://i.imgur.com/aKn0LVo.jpeg" alt="lovelace config editor example"></p>
+
+
+**For ToDo Sensor Support, check the official todo-list card from Home Assistant**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -68,28 +70,6 @@ Use this button to be redirected to the card's page on HACS
 | type  | **Required** | `custom:o365-card` |
 | entity | **Required**  | Home Assistant entity ID |
 | max_items | Optional | Maximum amount of items to show in the card <br> The header counter will still show the real value <br> Set to 0 to show all  |
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## To Do
-<p align="center"><img src="img/task.webp" alt="task sensor example"></p>
-
-* The card Lists the items from a tasks sensor ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/sensor.html#taskto-do-sensor))
-* By default the sensor only retrieves incomplete tasks, if you want to show completed ones too, you need to configure it on the tasks configuration file ([doc](https://rogerselwyn.github.io/O365-HomeAssistant/tasks_configuration.html#tasks-configuration))
-* Each item has a link that will take you to the item's page on todo.office.com
-* The State Color is based on the Due Date:
-  * :warning: Warning : With Due Date, not overdue
-  * :no_entry: Alert: With Due Date, overdue
-  * :information_source: Info: Without Due Date
-  * :white_check_mark: Success: Completed task
-
-#### Options
-| Name | Requirement | Description | 
-| --- | --- | --- |
-| type  | **Required** | `custom:o365-card` |
-| entity | **Required**  | Home Assistant entity ID |
-| max_items | Optional | Maximum amount of items to show in the card <br> The header counter will still show the real value <br> Set to 0 to show all  |
-| only_overdue | Optional | Only show overdue tasks <br> Default: false |
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Teams
